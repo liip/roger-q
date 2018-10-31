@@ -1,5 +1,9 @@
 # Roger-Q
 
+[![Latest Version](https://img.shields.io/github/release/liip/roger-q.svg?style=flat-square)](https://github.com/liip/roger-q/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/liip/roger-q/master.svg?style=flat-square)](https://travis-ci.org/liip/roger-q)
+
 Roger-Q is a tool to handle RabbitMQ queues, and it includes commands to dump, dedupe and publish messages.
 
 ## Commands
