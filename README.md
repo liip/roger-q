@@ -2,7 +2,11 @@
 
 Roger-Q is a tool to handle RabbitMQ queues, and it includes commands to dump, dedupe and publish messages.
 
+Roger-Q uses the RabbitMQ management API, rather than the regular protocol to read and write messages, which is much faster for queues with many messages.
+
 ## Commands
+
+To see all options of a command, run ```roger-q.phar help {commmand}```.
 
 ### Dump (`dump`)
 
