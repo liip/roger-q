@@ -1,0 +1,21 @@
+{
+    "name": "liip/roger-q",
+    "type": "project",
+    "description": "Tool to work with RabbitMQ queues, including commands to dump, deduplicate and publish messages",
+    "keywords": ["rabbitmq", "queue"],
+    "license": "GPL-3.0",
+    "require": {
+        "php": "^7.1",
+        "symfony/console": "^4.1",
+        "enqueue/amqp-bunny": "^0.8.40",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/roger-q.php"
+    ]
+}

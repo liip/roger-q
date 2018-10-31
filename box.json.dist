@@ -1,0 +1,5 @@
+{
+  "output": "dist/roger-q.phar",
+  "chmod": "0700",
+  "compression": "GZ"
+}
