@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## 0.0.1
+### Fixed
+- Fixed TravisCI deployment process and phar releasing
+
 ## 0.0.1-beta.1
 ### Added
 - Added TravisCI integration
