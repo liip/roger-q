@@ -16,7 +16,7 @@ To see all options of a command, run `roger-q.phar {commmand} --help`.
 
 Dumps the messages from the given queue to the standard output.
 
-The messages will be outputted as JSON, as in the following example (the example has been pretty-formatted):
+The messages are dumped as JSON as in the following example (the example has been pretty-formatted):
 ```json5
 [
   {
