@@ -18,11 +18,12 @@ jobs:
     - stage: test
       script: make phpcs
     - stage: deploy
-      script: make dist
+      script: skip
+      before_deploy: make dist
       deploy:
         provider: releases
         api_key:
-          secure: tQ/H25apj4Lt4Apx049qDmwvdDJz8TvfRCIUf0y5IdvM277xmDcoDQIt5kJMzgBm4cvhgMauCc9RqaBT9a4nEVhWzBNS5S6kp9WZ3FEgiXIwLsewD3XfkrGt8H2bRi5XKsxNttmFwHd4bP6Wjm5VAWXYpz+HOtYXd8ciXtQcA/pJaouBpN0+7SkM9F1lFSoNQjms4cN/lNofo2cLnt1Ti0EhEjubcE6xJKa36u0kw+nV1jwOBsBFyDUn4KuU/6N4DDO05GW29qAf+tZRPnZplh9J0z6gCCCSJh6u4Dg+PVZgA9hp4Z06pQRdyW8HlO/MqC7q4J45CiMtmlRFPRcog/GOGpoO1djn3upOLEMrIha4tqAI/kwfeFcQZ1D4u+e3BAe/7TZhXKCubJxhnFTtAs618t2Y0UGIgHExTJt1gZVdUxtC488rk6lTY/vuMBWaN+yJ5Py35bYGBOERr3bdNwWmZWT7+f1ED9LhOg5rE3qrOZc4OeRbG1605S+mmlzn7SYmgqfy7NucXsbYhNkpovvTdhDPcCz+RNHCD4PouxthlgKeOOMqXybV4mVypO3cdVeMhgV6WzDfeuZf4ynWsGENZTM5OZrsspxXJRaAiyiihKGDvD0/dIIIwtci8ggVSsinMY+D9XcK+y7lEe9+0kCK9if5c3SF8kKN03Y8akQ=
+          secure: $GITHUB_SECURE_TOKEN
         file: dist/roger-q.phar
         skip_cleanup: true
         on:
