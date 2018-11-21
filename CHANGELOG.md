@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+- Use correct default port and catch port in hostname [PR#6](https://github.com/liip/roger-q/pull/6) by [@dbu](https://github.com/dbu)
 ### Security
 
 ## 0.0.1
