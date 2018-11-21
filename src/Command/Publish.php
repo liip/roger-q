@@ -16,6 +16,8 @@ use function GuzzleHttp\json_decode;
 
 class Publish extends Command
 {
+    public const DEFAULT_RABBITMQ_PORT = 5672;
+
     protected static $defaultName = 'publish';
 
     protected function configure(): void
@@ -23,7 +25,7 @@ class Publish extends Command
         $this
             ->setDescription('Publishes messages to the specified queue')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
-            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'Port to connect to RabbitMQ', 5672)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'Port to connect to RabbitMQ', static::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')
@@ -34,6 +36,12 @@ class Publish extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $host = $input->getOption('host');
+        \assert(\is_string($host), 'host name is a string');
+        if (false !== \mb_strpos($host, ':')) {
+            throw new \UnexpectedValueException('You can not specify the port as part of the hostname. Use the separate "port" option.');
+        }
+
         $queueName = $input->getArgument('queue');
         \assert(\is_string($queueName));
 
