@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Support de-duplication on multiple payload fields [PR#8](https://github.com/liip/roger-q/pull/8) by [@thePanz](https://github.com/thePanz)
 ### Changed
 ### Deprecated
 ### Removed
