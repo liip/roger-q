@@ -20,14 +20,15 @@ class Dedupe extends Command
     {
         $this
             ->setDescription('Removes duplicated messages')
-            ->addArgument('field', InputArgument::REQUIRED, 'Name of the field which identifies each message')
+            ->addArgument('field', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Name of the JSON payload fields which identifies each message')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $field = $input->getArgument('field');
-        \assert(\is_string($field));
+        /** @var string[] $fields */
+        $fields = $input->getArgument('field');
+        \assert(\is_array($fields));
 
         $data = $this->readStdin();
         $messages = json_decode($data, true);
@@ -36,28 +37,9 @@ class Dedupe extends Command
         $seenValues = [];
         $cleanMessages = [];
         foreach ($messages as $i => $message) {
-            if (!array_key_exists('payload', $message)) {
-                throw new \UnexpectedValueException(sprintf(
-                    'Message #%d does not have a payload (%s)',
-                    $i,
-                    json_encode($message)
-                ));
-            }
-
-            $payload = json_decode($message['payload'], true);
-            if (!array_key_exists($field, $payload)) {
-                throw new \UnexpectedValueException(sprintf(
-                    'Payload of message #%d does not have the required field %s (%s)',
-                    $i,
-                    $field,
-                    $message['payload']
-                ));
-            }
-
-            if (\in_array($payload[$field], $seenValues, true)) {
+            if ($this->isDuplicatedMessage($fields, $message, $seenValues, $i)) {
                 ++$removedMessagesCount;
             } else {
-                $seenValues[] = $payload[$field];
                 $cleanMessages[] = $message;
             }
         }
@@ -72,6 +54,53 @@ class Dedupe extends Command
                 \count($cleanMessages)
             ));
         }
+    }
+
+    /**
+     * @param string[] $fields
+     */
+    private function getValuesHash(array $fields, array $data): string
+    {
+        $values = [];
+        foreach ($fields as $field) {
+            $values[$field] = $data[$field];
+        }
+
+        return sha1(serialize($values));
+    }
+
+    /**
+     * @param string[] $fields
+     * @param bool[]   $seenValues Hashmap of value-hash => bool, to keep track of values already encountered
+     */
+    private function isDuplicatedMessage(array $fields, array $message, array &$seenValues, int $messageNum): bool
+    {
+        if (!array_key_exists('payload', $message)) {
+            throw new \UnexpectedValueException(sprintf('Message #%d does not have a payload (%s)', $messageNum, json_encode($message)));
+        }
+
+        $payload = json_decode($message['payload'], true);
+
+        // Check that all given fields exist in the payload:
+        foreach ($fields as $field) {
+            if (!array_key_exists($field, $payload)) {
+                throw new \UnexpectedValueException(sprintf(
+                    'Payload of message #%d does not have the required fields %s (%s)',
+                    $messageNum,
+                    implode(',', $fields),
+                    $message['payload']
+                ));
+            }
+        }
+
+        $hash = $this->getValuesHash($fields, $payload);
+        if (\array_key_exists($hash, $seenValues)) {
+            return true;
+        }
+
+        $seenValues[$hash] = true;
+
+        return false;
     }
 
     private function readStdin(): string
