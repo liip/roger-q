@@ -60,7 +60,9 @@ The resulting messages are outputted to the standard output.
 
 ### Publish (`publish`)
 
-Publish messages to a given queue.
+Reads messages from the standard input and publishes them to the specified *queue*. Usually, you would send messages to
+an exchange rather than a queue directly, but the use-case of this tool is to clean up queues. If you specify an
+exchange instead of a queue, the messages will be reported as published but not arrive anywhere.
 
 The following example will publish the messages from the `messages.txt` file into the `queue-name` queue.
 The queue is additionally purged before starting the publishing operation.
