@@ -16,7 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Publish extends Command
 {
-    public const DEFAULT_RABBITMQ_PORT = 5672;
+    /**
+     * We publish with the amqp protocol.
+     */
+    private const DEFAULT_RABBITMQ_PORT = 5672;
 
     protected static $defaultName = 'publish';
 
@@ -25,7 +28,7 @@ class Publish extends Command
         $this
             ->setDescription('Publishes messages to the specified queue')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
-            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'Port to connect to RabbitMQ', static::DEFAULT_RABBITMQ_PORT)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ message port', static::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')

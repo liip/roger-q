@@ -16,6 +16,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Dump extends Command
 {
+    /**
+     * We dump from the HTTP API which runs on a different port than amqp.
+     */
+    private const DEFAULT_RABBITMQ_PORT = 15672;
+
     protected static $defaultName = 'dump';
 
     protected function configure(): void
@@ -23,7 +28,7 @@ class Dump extends Command
         $this
             ->setDescription('Dumps the messages of the specified queue to the standard output')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
-            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'Port to connect to RabbitMQ', Publish::DEFAULT_RABBITMQ_PORT)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ HTTP API port', static::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')
@@ -79,7 +84,7 @@ class Dump extends Command
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
             $output->getErrorOutput()->writeln(sprintf(
-                'Dumped <info>%s</info> bytes from queue <info>%s</info>',
+                'Dumped <info>%s</info> bytes (gzip) from queue <info>%s</info>',
                 $response->getHeaderLine('x-encoded-content-length'),
                 $queueName
             ));
