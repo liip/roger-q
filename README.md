@@ -12,9 +12,16 @@ To get the list of all commands, run `roger-q.phar list`
 
 To see all options of a command, run `roger-q.phar {commmand} --help`.
 
+Except for dedupe, the commands require the `--host` option to know where to find RabbitMQ, and `--username`,
+`--password` and `--vhost`. The default is localhost on port 5672 with vhost `/` and credentials guest/guest.
+(Hint: Pull request to support a configuration file for these parameters would be welcome.)
+
 ### Dump (`dump`)
 
-Dumps the messages from the given queue to the standard output.
+Dumps the messages from the given queue to the standard output. The command uses the RabbitMQ management API, rather
+than the regular protocol, to read and write messages, which is much faster for queues with many messages. This means
+that you need to install the [Management Plugin](https://www.rabbitmq.com/management.html) in your RabbitMQ. If you do
+not use the default port 15672, you need to specify the `--port` parameter.
 
 The messages are dumped as JSON as in the following example (the example has been pretty-formatted):
 ```json5
@@ -34,9 +41,6 @@ The messages are dumped as JSON as in the following example (the example has bee
    // Next messages here...
 ]
 ```
-
-The command uses the RabbitMQ management API, rather than the regular protocol, to read and write messages, which is much
-faster for queues with many messages.
 
 Example usage:
 
