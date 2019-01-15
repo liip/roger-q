@@ -26,7 +26,7 @@ class Publish extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Publishes messages to the specified queue')
+            ->setDescription('Publishes messages from STDIN to the specified queue (NOT an exchange but only a queue)')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
             ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ message port', static::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
