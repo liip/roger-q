@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use Enqueue\AmqpBunny\AmqpConnectionFactory;
+use function GuzzleHttp\json_decode;
 use Interop\Amqp\Impl\AmqpMessage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,7 +13,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use function GuzzleHttp\json_decode;
 
 class Publish extends Command
 {
