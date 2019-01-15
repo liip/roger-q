@@ -34,6 +34,9 @@ return Config::create()
         'multiline_whitespace_before_semicolons' => [
             'strategy' => 'new_line_for_chained_calls',
         ],
+        'native_function_invocation' => [
+            'include' => ['@compiler_optimized'],
+        ],
         'no_alternative_syntax' => true,
         'no_binary_string' => true,
         'no_null_property_initialization' => true,
