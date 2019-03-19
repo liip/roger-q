@@ -6,6 +6,14 @@
 
 Roger-Q is a tool to handle RabbitMQ queues, and it includes commands to dump, dedupe and publish messages.
 
+## Installation
+
+Run this to download the latest release from Github, move it into your bin folder, and make it executable:
+```bash 
+curl -L https://gitreleases.dev/gh/liip/roger-q/latest/roger-q.phar > /usr/local/bin/roger-q
+chmod a+x /usr/local/bin/roger-q
+```
+
 ## Commands
 
 To get the list of all commands, run `roger-q.phar list`
