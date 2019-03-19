@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use Enqueue\AmqpBunny\AmqpConnectionFactory;
-use function GuzzleHttp\json_decode;
 use Interop\Amqp\Impl\AmqpMessage;
+use Pnz\JsonException\Json;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -49,7 +49,7 @@ class Publish extends Command
         \assert(\is_string($queueName));
 
         $data = $this->readStdin();
-        $messages = json_decode($data, true);
+        $messages = Json::decode($data, true);
 
         $factory = new AmqpConnectionFactory([
             'host' => $input->getOption('host'),
