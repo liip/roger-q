@@ -1,6 +1,6 @@
 # Roger-Q
 
-[![Latest Version](https://img.shields.io/github/release/liip/roger-q.svg?style=flat-square)](https://github.com/liip/roger-q/releases)
+[![Latest Version](https://img.shields.io/github/release/liip/roger-q.svg?style=flat-square)](https://gitreleases.dev/gh/liip/roger-q/latest/roger-q.phar)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build Status](https://img.shields.io/travis/liip/roger-q/master.svg?style=flat-square)](https://travis-ci.org/liip/roger-q)
 
