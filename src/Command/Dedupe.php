@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
+use Pnz\JsonException\Json;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +30,7 @@ class Dedupe extends Command
         \assert(\is_array($fields));
 
         $data = $this->readStdin();
-        $messages = json_decode($data, true);
+        $messages = Json::decode($data, true);
 
         $removedMessagesCount = 0;
         $seenValues = [];
@@ -44,7 +43,7 @@ class Dedupe extends Command
             }
         }
 
-        $output->writeln(json_encode($cleanMessages));
+        $output->writeln(Json::encode($cleanMessages));
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
             $output->getErrorOutput()->writeln(sprintf(
@@ -75,15 +74,15 @@ class Dedupe extends Command
      */
     private function isDuplicatedMessage(array $fields, array $message, array &$seenValues, int $messageNum): bool
     {
-        if (!array_key_exists('payload', $message)) {
-            throw new \UnexpectedValueException(sprintf('Message #%d does not have a payload (%s)', $messageNum, json_encode($message)));
+        if (!\array_key_exists('payload', $message)) {
+            throw new \UnexpectedValueException(sprintf('Message #%d does not have a payload (%s)', $messageNum, Json::encode($message)));
         }
 
-        $payload = json_decode($message['payload'], true);
+        $payload = Json::decode($message['payload'], true);
 
         // Check that all given fields exist in the payload:
         foreach ($fields as $field) {
-            if (!array_key_exists($field, $payload)) {
+            if (!\array_key_exists($field, $payload)) {
                 throw new \UnexpectedValueException(sprintf(
                     'Payload of message #%d does not have the required fields %s (%s)',
                     $messageNum,

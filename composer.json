@@ -6,14 +6,18 @@
     "license": "GPL-3.0",
     "require": {
         "php": "^7.1",
-        "symfony/console": "^4.1",
         "enqueue/amqp-bunny": "^0.8.40",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "pnz/json-exception": "^0.1.0",
+        "symfony/console": "^4.1"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "bin": [
         "bin/roger-q.php"
