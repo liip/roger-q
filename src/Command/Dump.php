@@ -33,7 +33,7 @@ class Dump extends Command
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')
             ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Number of messages to dump')
-            ->addOption('no-requeue', null, InputOption::VALUE_NONE, 'Disables the requeue of messages, the queue will stay empty')
+            ->addOption('ackmode', null, InputOption::VALUE_REQUIRED, 'Determines whether the messages will be removed from the queue. Valid options are: "reject_requeue_true", "ack_requeue_true", "ack_requeue_false", "reject_requeue_false"', 'reject_requeue_true')
             ->addArgument('queue', InputArgument::REQUIRED, 'Name of the queue to dump')
         ;
     }
@@ -66,7 +66,7 @@ class Dump extends Command
 
         $data = [
             'count' => $input->getOption('limit'),
-            'requeue' => !$input->getOption('no-requeue'),
+            'ackmode' => $input->getOption('ackmode'),
             'encoding' => 'auto',
         ];
         if (null === $data['count']) {
