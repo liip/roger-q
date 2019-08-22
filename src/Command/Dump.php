@@ -79,13 +79,20 @@ class Dump extends Command
                 'Transfer-Encoding' => 'chunked',
             ],
             RequestOptions::JSON => $data,
-            RequestOptions::SINK => STDOUT,
         ]);
+        if (200 !== $response->getStatusCode()) {
+            throw new \RuntimeException('Error '.$response->getStatusCode()."\n".$response->getBody()->getContents());
+        }
+
+        $stream = $response->getBody();
+        while (!$stream->eof()) {
+            $output->write($stream->read(100000));
+        }
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
             $output->getErrorOutput()->writeln(sprintf(
                 'Dumped <info>%s</info> bytes (gzip) from queue <info>%s</info>',
-                $response->getHeaderLine('x-encoded-content-length'),
+                $response->hasHeader('x-encoded-content-length') ? $response->getHeaderLine('x-encoded-content-length') : 'unspecified',
                 $queueName
             ));
         }
