@@ -10,7 +10,7 @@ Roger-Q is a tool to handle RabbitMQ queues, and it includes commands to dump, d
 
 Run this to download the latest release from Github, move it into your bin folder, and make it executable:
 ```bash
-curl -L https://gitreleases.dev/gh/liip/roger-q/latest/roger-q.phar > /usr/local/bin/roger-q
+curl -L https://github.com/liip/roger-q/releases/latest/download/roger-q.phar > /usr/local/bin/roger-q
 chmod a+x /usr/local/bin/roger-q
 ```
 
