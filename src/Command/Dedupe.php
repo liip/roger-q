@@ -59,6 +59,7 @@ class Dedupe extends Command
 
     /**
      * @param string[] $fields
+     * @param mixed[]  $data
      */
     private function getValuesHash(array $fields, array $data): string
     {
@@ -71,8 +72,9 @@ class Dedupe extends Command
     }
 
     /**
-     * @param string[] $fields
-     * @param bool[]   $seenValues Hashmap of value-hash => bool, to keep track of values already encountered
+     * @param string[]            $fields
+     * @param mixed[]             $message
+     * @param array<string, bool> $seenValues Hashmap of value-hash => bool, to keep track of values already encountered
      */
     private function isDuplicatedMessage(array $fields, array $message, array &$seenValues, int $messageNum): bool
     {
@@ -85,12 +87,7 @@ class Dedupe extends Command
         // Check that all given fields exist in the payload:
         foreach ($fields as $field) {
             if (!\array_key_exists($field, $payload)) {
-                throw new \UnexpectedValueException(sprintf(
-                    'Payload of message #%d does not have the required fields %s (%s)',
-                    $messageNum,
-                    implode(',', $fields),
-                    $message['payload']
-                ));
+                throw new \UnexpectedValueException(sprintf('Payload of message #%d does not have the required fields %s (%s)', $messageNum, implode(',', $fields), $message['payload']));
             }
         }
 
@@ -107,8 +104,8 @@ class Dedupe extends Command
     private function readStdin(): string
     {
         $data = '';
-        while (!feof(STDIN)) {
-            $data .= fread(STDIN, 1024);
+        while (!feof(\STDIN)) {
+            $data .= fread(\STDIN, 1024);
         }
 
         if ('' === $data) {

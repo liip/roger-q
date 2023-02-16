@@ -28,7 +28,7 @@ class Dump extends Command
         $this
             ->setDescription('Dumps the messages of the specified queue to the standard output')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
-            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ HTTP API port', static::DEFAULT_RABBITMQ_PORT)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ HTTP API port', self::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')
@@ -70,7 +70,7 @@ class Dump extends Command
             'encoding' => 'auto',
         ];
         if (null === $data['count']) {
-            $data['count'] = PHP_INT_MAX;
+            $data['count'] = \PHP_INT_MAX;
         }
 
         $response = $guzzle->request('POST', sprintf('/api/queues/%s/%s/get', $vHost, $queueName), [
