@@ -38,7 +38,7 @@ class Dump extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $queueName = $input->getArgument('queue');
         $host = $input->getOption('host');
@@ -96,5 +96,7 @@ class Dump extends Command
                 $queueName
             ));
         }
+
+        return Command::SUCCESS;
     }
 }

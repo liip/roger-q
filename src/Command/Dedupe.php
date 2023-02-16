@@ -23,7 +23,7 @@ class Dedupe extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string[] $fields */
         $fields = $input->getArgument('field');
@@ -53,6 +53,8 @@ class Dedupe extends Command
                 \count($cleanMessages)
             ));
         }
+
+        return Command::SUCCESS;
     }
 
     /**

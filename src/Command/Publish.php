@@ -81,6 +81,8 @@ class Publish extends Command
                 $queueName
             ));
         }
+
+        return Command::SUCCESS;
     }
 
     private function readStdin(): string
