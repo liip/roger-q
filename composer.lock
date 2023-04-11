@@ -72,16 +72,16 @@
         },
         {
             "name": "enqueue/amqp-bunny",
-            "version": "0.10.9",
+            "version": "0.10.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/amqp-bunny.git",
-                "reference": "85a3ea3030d87125dff1866cbebae36798120ba7"
+                "reference": "e6c04f44b1a3069b1e0cd3a4512b017c23dce285"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/amqp-bunny/zipball/85a3ea3030d87125dff1866cbebae36798120ba7",
-                "reference": "85a3ea3030d87125dff1866cbebae36798120ba7",
+                "url": "https://api.github.com/repos/php-enqueue/amqp-bunny/zipball/e6c04f44b1a3069b1e0cd3a4512b017c23dce285",
+                "reference": "e6c04f44b1a3069b1e0cd3a4512b017c23dce285",
                 "shasum": ""
             },
             "require": {
@@ -130,20 +130,20 @@
                 "issues": "https://github.com/php-enqueue/enqueue-dev/issues",
                 "source": "https://github.com/php-enqueue/enqueue-dev"
             },
-            "time": "2021-02-17T21:30:21+00:00"
+            "time": "2023-02-26T03:18:02+00:00"
         },
         {
             "name": "enqueue/amqp-tools",
-            "version": "0.10.9",
+            "version": "0.10.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/amqp-tools.git",
-                "reference": "1a2bdcacf0b56c677df965544baa1801d8dd95e1"
+                "reference": "1a68bcae51fcbe6e55cac42d455e6064513a5111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/amqp-tools/zipball/1a2bdcacf0b56c677df965544baa1801d8dd95e1",
-                "reference": "1a2bdcacf0b56c677df965544baa1801d8dd95e1",
+                "url": "https://api.github.com/repos/php-enqueue/amqp-tools/zipball/1a68bcae51fcbe6e55cac42d455e6064513a5111",
+                "reference": "1a68bcae51fcbe6e55cac42d455e6064513a5111",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
                 "issues": "https://github.com/php-enqueue/enqueue-dev/issues",
                 "source": "https://github.com/php-enqueue/enqueue-dev"
             },
-            "time": "2021-02-17T21:24:06+00:00"
+            "time": "2023-02-26T03:18:02+00:00"
         },
         {
             "name": "enqueue/dsn",
@@ -649,25 +649,25 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0.1",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -696,9 +696,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
+                "source": "https://github.com/php-fig/http-message/tree/1.1"
             },
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2023-04-04T09:50:52+00:00"
         },
         {
             "name": "queue-interop/amqp-interop",
@@ -994,16 +994,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.19",
+            "version": "v5.4.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "dccb8d251a9017d5994c988b034d3e18aaabf740"
+                "reference": "3cd51fd2e6c461ca678f84d419461281bd87a0a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/dccb8d251a9017d5994c988b034d3e18aaabf740",
-                "reference": "dccb8d251a9017d5994c988b034d3e18aaabf740",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3cd51fd2e6c461ca678f84d419461281bd87a0a8",
+                "reference": "3cd51fd2e6c461ca678f84d419461281bd87a0a8",
                 "shasum": ""
             },
             "require": {
@@ -1068,12 +1068,12 @@
             "homepage": "https://symfony.com",
             "keywords": [
                 "cli",
-                "command line",
+                "command-line",
                 "console",
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.19"
+                "source": "https://github.com/symfony/console/tree/v5.4.22"
             },
             "funding": [
                 {
@@ -1089,7 +1089,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:32:19+00:00"
+            "time": "2023-03-25T09:27:28+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1898,16 +1898,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.19",
+            "version": "v5.4.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0a01071610fd861cc160dfb7e2682ceec66064cb"
+                "reference": "8036a4c76c0dd29e60b6a7cafcacc50cf088ea62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0a01071610fd861cc160dfb7e2682ceec66064cb",
-                "reference": "0a01071610fd861cc160dfb7e2682ceec66064cb",
+                "url": "https://api.github.com/repos/symfony/string/zipball/8036a4c76c0dd29e60b6a7cafcacc50cf088ea62",
+                "reference": "8036a4c76c0dd29e60b6a7cafcacc50cf088ea62",
                 "shasum": ""
             },
             "require": {
@@ -1964,7 +1964,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.19"
+                "source": "https://github.com/symfony/string/tree/v5.4.22"
             },
             "funding": [
                 {
@@ -1980,7 +1980,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:32:19+00:00"
+            "time": "2023-03-14T06:11:53+00:00"
         }
     ],
     "packages-dev": [],

@@ -6,7 +6,7 @@ dist/roger-q.phar: box.json.dist tools/box.phar bin/roger-q.php $(SRC_FILES) com
 	./tools/box.phar compile --quiet
 
 tools/box.phar:
-	wget --directory-prefix=tools --quiet https://github.com/humbug/box/releases/download/4.2.0/box.phar
+	wget --directory-prefix=tools --quiet https://github.com/humbug/box/releases/download/3.16.0/box.phar
 	chmod +x tools/box.phar
 
 tools/php-cs-fixer.phar:
@@ -20,7 +20,7 @@ tools/phpstan.phar:
 phpcs: tools/php-cs-fixer.phar tools/phpstan.phar
 	composer install --optimize-autoloader --no-dev --no-suggest --quiet
 	tools/php-cs-fixer.phar fix --dry-run --stop-on-violation -v
-	tools/phpstan.phar analyze --level=8 --no-progress bin/ src/
+	tools/phpstan.phar analyze
 
 fix-cs: tools/php-cs-fixer.phar
 	tools/php-cs-fixer.phar fix -v
