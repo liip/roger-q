@@ -27,6 +27,9 @@ jobs:
       - name: Install PHP dependencies
         run: composer update --prefer-dist --no-interaction --no-progress
 
+      - name: Set version
+        run: sed -i "s/setVersion('latest-develop')/setVersion('$GITHUB_REF_NAME')/g" bin/roger-q.php
+
       - name: Generate phar
         run: make dist
 

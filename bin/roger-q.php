@@ -11,6 +11,8 @@ use App\Command\Publish;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
+$application->setName('roger-q rabbitmq tool');
+$application->setVersion('latest-develop');
 
 $application->add(new Dump());
 $application->add(new Dedupe());
