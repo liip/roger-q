@@ -5,11 +5,11 @@
     "keywords": ["rabbitmq", "queue"],
     "license": "GPL-3.0",
     "require": {
-        "php": "^7.1",
-        "enqueue/amqp-bunny": "^0.8.40",
-        "guzzlehttp/guzzle": "^6.3",
-        "pnz/json-exception": "^0.1.0",
-        "symfony/console": "^4.1"
+        "php": "^7.4 || ^8.0",
+        "enqueue/amqp-bunny": "^0.10.9",
+        "guzzlehttp/guzzle": "^6.5.8",
+        "pnz/json-exception": "^1.0.0",
+        "symfony/console": "^5.4"
     },
     "autoload": {
         "psr-4": {
@@ -17,6 +17,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "7.4"
+        },
         "sort-packages": true
     },
     "bin": [

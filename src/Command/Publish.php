@@ -28,7 +28,7 @@ class Publish extends Command
         $this
             ->setDescription('Publishes messages from STDIN to the specified queue (NOT an exchange but only a queue)')
             ->addOption('host', null, InputOption::VALUE_REQUIRED, 'RabbitMQ host to connect to', 'localhost')
-            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ message port', static::DEFAULT_RABBITMQ_PORT)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'RabbitMQ message port', self::DEFAULT_RABBITMQ_PORT)
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Username for the RabbitMQ connection', 'guest')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password for the RabbitMQ connection', 'guest')
             ->addOption('vhost', null, InputOption::VALUE_REQUIRED, 'RabbitMQ VHost where the queue is declared', '/')
@@ -37,11 +37,11 @@ class Publish extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $host = $input->getOption('host');
         \assert(\is_string($host), 'host name is a string');
-        if (false !== \mb_strpos($host, ':')) {
+        if (false !== mb_strpos($host, ':')) {
             throw new \UnexpectedValueException('You can not specify the port as part of the hostname. Use the separate "port" option.');
         }
 
@@ -81,13 +81,15 @@ class Publish extends Command
                 $queueName
             ));
         }
+
+        return Command::SUCCESS;
     }
 
     private function readStdin(): string
     {
         $data = '';
-        while (!feof(STDIN)) {
-            $data .= fread(STDIN, 1024);
+        while (!feof(\STDIN)) {
+            $data .= fread(\STDIN, 1024);
         }
 
         if ('' === $data) {

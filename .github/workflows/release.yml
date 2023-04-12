@@ -1,0 +1,39 @@
+name: Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  latest:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Set version
+        run: sed -i "s/setVersion('latest-develop')/setVersion('$GITHUB_REF_NAME')/g" bin/roger-q.php
+
+      - name: Generate phar
+        run: make dist
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/roger-q.phar
