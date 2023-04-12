@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## 0.1.0
+
+- Updated depencencies
+
 ## 0.0.2
 ### Added
 - Support de-duplication on multiple payload fields [PR#8](https://github.com/liip/roger-q/pull/8) by [@thePanz](https://github.com/thePanz)
