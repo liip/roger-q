@@ -75,7 +75,7 @@ class Publish extends Command
         }
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->getErrorOutput()->writeln(sprintf(
+            $output->getErrorOutput()->writeln(\sprintf(
                 'Published <info>%s</info> messages to queue <info>%s</info>',
                 \count($messages),
                 $queueName
