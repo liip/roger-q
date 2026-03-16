@@ -5,7 +5,7 @@ name: GitHub Actions Security Analysis with zizmor 🌈
 
 on:
   push:
-    branches: ["main"]
+    branches: ["*.x"]
   pull_request:
     branches: ["**"]
 
@@ -13,7 +13,8 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
-permissions: {}
+permissions:
+    security-events: write
 
 jobs:
   zizmor:
