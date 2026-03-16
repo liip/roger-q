@@ -1,24 +1,31 @@
 name: Release
 
-permissions:
-  contents: write
-
 on:
   push:
     tags:
       - '*'
 
+permissions: {}
+
+concurrency:
+  group: global
+  cancel-in-progress: false
+
 jobs:
   latest:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # required for gh release
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: '7.4'
           tools: composer:v2
@@ -33,7 +40,10 @@ jobs:
       - name: Generate phar
         run: make dist
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/roger-q.phar
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" ./dist/roger-q.phar \
+            --title "$GITHUB_REF_NAME" \
+            --notes "Stable release."
