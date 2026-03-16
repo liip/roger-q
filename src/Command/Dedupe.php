@@ -46,7 +46,7 @@ class Dedupe extends Command
         $output->writeln(Json::encode($cleanMessages));
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->getErrorOutput()->writeln(sprintf(
+            $output->getErrorOutput()->writeln(\sprintf(
                 'Removed <info>%d</info> duplicated messages out of <info>%d</info> total messages, resulting in <info>%d</info> messages',
                 $removedMessagesCount,
                 \count($messages),
@@ -79,7 +79,7 @@ class Dedupe extends Command
     private function isDuplicatedMessage(array $fields, array $message, array &$seenValues, int $messageNum): bool
     {
         if (!\array_key_exists('payload', $message)) {
-            throw new \UnexpectedValueException(sprintf('Message #%d does not have a payload (%s)', $messageNum, Json::encode($message)));
+            throw new \UnexpectedValueException(\sprintf('Message #%d does not have a payload (%s)', $messageNum, Json::encode($message)));
         }
 
         $payload = Json::decode($message['payload'], true);
@@ -87,7 +87,7 @@ class Dedupe extends Command
         // Check that all given fields exist in the payload:
         foreach ($fields as $field) {
             if (!\array_key_exists($field, $payload)) {
-                throw new \UnexpectedValueException(sprintf('Payload of message #%d does not have the required fields %s (%s)', $messageNum, implode(',', $fields), $message['payload']));
+                throw new \UnexpectedValueException(\sprintf('Payload of message #%d does not have the required fields %s (%s)', $messageNum, implode(',', $fields), $message['payload']));
             }
         }
 

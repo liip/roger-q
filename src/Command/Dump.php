@@ -73,7 +73,7 @@ class Dump extends Command
             $data['count'] = \PHP_INT_MAX;
         }
 
-        $response = $guzzle->request('POST', sprintf('/api/queues/%s/%s/get', $vHost, $queueName), [
+        $response = $guzzle->request('POST', \sprintf('/api/queues/%s/%s/get', $vHost, $queueName), [
             RequestOptions::HEADERS => [
                 'Accept-Encoding' => 'gzip',
                 'Transfer-Encoding' => 'chunked',
@@ -90,7 +90,7 @@ class Dump extends Command
         }
 
         if ($output instanceof ConsoleOutputInterface && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->getErrorOutput()->writeln(sprintf(
+            $output->getErrorOutput()->writeln(\sprintf(
                 'Dumped <info>%s</info> bytes (gzip) from queue <info>%s</info>',
                 $response->hasHeader('x-encoded-content-length') ? $response->getHeaderLine('x-encoded-content-length') : 'unspecified',
                 $queueName
